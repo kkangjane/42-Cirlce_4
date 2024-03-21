@@ -3,17 +3,17 @@
 
 # include <iostream>
 
-class	Zombie
+class Zombie
 {
-	private:
-		std::string	name;
-	public:
-		void	announce(void);
-		void	AddName(std::string _name);
-		Zombie(void);
-		~Zombie(void);
+private:
+	std::string	name;
+public:
+	Zombie(void);
+	~Zombie(void);
+	void	announce(void);
+	void	AddName(std::string _name);
 };
 
-Zombie	*ZombieHorde(int N, std::string name);
+Zombie*	ZombieHorde(int N, std::string name);
 
 #endif

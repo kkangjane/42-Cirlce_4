@@ -2,9 +2,13 @@
 
 int	main(void)
 {
-	Zombie	*zombies = ZombieHorde(10, "zombie");
+	Zombie	*test = ZombieHorde(10, "zombie");
 
+	// ZombieHorde error
+	if (!test)
+		return 1;
+	// introduce themselves
 	for (int i = 0; i < 10; i++)
-		zombies[i].announce();
-	return (0);
+		test[i].announce();
+	return 0;
 }
