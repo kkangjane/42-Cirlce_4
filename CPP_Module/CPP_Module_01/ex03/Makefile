@@ -10,7 +10,6 @@ all : $(NAME)
 
 $(NAME) : $(OBJS)
 	$(GCC) $(OBJS) -o $(NAME)
-	chmod +x $(NAME)
 
 clean :
 	rm -rf $(OBJS)
