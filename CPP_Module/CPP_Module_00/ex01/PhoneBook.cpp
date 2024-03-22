@@ -1,56 +1,73 @@
-#include "includes/PhoneBook.hpp"
+#include "PhoneBook.hpp"
 
-void	PhoneBook::AddContact(void)
+static int	atoidx(std::string num);
+
+PhoneBook::PhoneBook() : last_idx(-1)
 {
-	contacts[last_idx % 8].AddContact();
-	last_idx++;
 }
 
-void	PhoneBook::SearchContact(void)
+int	PhoneBook::AddContact(void)
 {
-	std::string	input;
+	last_idx++;
+	if (this->contacts[last_idx % 8].AddContact() == -1)
+		return -1;
+	return 0;
+}
+
+int	PhoneBook::SearchContact(void)
+{
+	std::string str;
 	int			idx;
 
+	if (last_idx == -1)
+	{
+		std::cout << "** phonebook is empty ** " << std::endl;
+		return 0;
+	}
 	PrintPhoneBook();
-	std::cout << "what do you want > ";
-	std::cin >> input;
-	if (input.length() != 1 || !(input[0] >= '1' && input[0] <= '8'))
+
+	while (true)
 	{
-		std::cout << "** idx is wrong **" << std::endl;
-		return ;
+		std::cout << "index > ";
+		std::cin >> str;
+		if (std::cin.eof())
+			return -1;
+		idx = atoidx(str);
+		if (idx <= last_idx && idx >= 0 && idx < 8)
+			break ;
+		std::cout << "** index is wrong. retry **" << std::endl;
 	}
-	idx = input[0] - '0' - 1;
-	if (last_idx < 8 && idx >= last_idx)
-	{
-		std::cout << "** idx is wrong **" << std::endl;
-		return ;
-	}
-	contacts[idx].PrintContact();
+	this->contacts[idx].PrintContact();
+	return 0;
 }
 
 void	PhoneBook::PrintPhoneBook(void)
 {
-	int	i;
+	int	idx = 0;
 
-	if (last_idx == 0)
-	{
-		std::cout << "** phonebook is empty **" << std::endl;
-		return ;
-	}
-	std::cout << "_____________________________________________" << std::endl;
-	std::cout << "|       idx|first name| last name|  nickname|" << std::endl;
 	std::cout << "---------------------------------------------" << std::endl;
-	i = 0;
-	while (i < last_idx && i < 8)
+	std::cout << "|       idx|first name| last name| nick name|" << std::endl;
+	std::cout << "---------------------------------------------" << std::endl;
+	while (idx < 8 && idx <= last_idx)
 	{
-		std::cout << "|         " << i + 1<< "|";
-		contacts[i].PrintFirstName();
-		std::cout << "|";
-		contacts[i].PrintLastName();
-		std::cout << "|";
-		contacts[i].PrintNickname();
-		std::cout << "|" << std::endl;
+		std::cout << "|         " << idx + 1 << "|";
+		this->contacts[idx].PrintFirstName();
+		this->contacts[idx].PrintLastName();
+		this->contacts[idx].PrintNickName();
+		std::cout << std::endl;
 		std::cout << "---------------------------------------------" << std::endl;
-		i++;
+		idx++;
 	}
+}
+
+static int	atoidx(std::string num)
+{
+	int		idx;
+
+	if (num.size() != 1)
+		return -1;
+	if (num[0] < '1' | num[0] > '9')
+		return -1;
+	idx = num[0] - '0' - 1;
+	return idx;
 }

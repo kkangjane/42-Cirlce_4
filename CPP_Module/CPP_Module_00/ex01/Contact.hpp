@@ -1,10 +1,11 @@
 #ifndef CONTACT_HPP
 #define CONTACT_HPP
 
-#include <iostream>
-#include <iomanip>
-#include <string>
-#include <cstdlib>
+# include <iostream>
+# include <iomanip>
+# include <string>
+# include <cstdlib>
+
 class	Contact
 {
 	private:
@@ -14,12 +15,11 @@ class	Contact
 		std::string	phone_num;
 		std::string	secret;
 	public:
-		void		AddContact(void);
+		int			AddContact(void);
 		void		PrintFirstName(void);
 		void		PrintLastName(void);
-		void		PrintNickname(void);
-		void		PrintContact(void);
-		void		GetPhoneNum(void);
+		void		PrintNickName(void);
+		void		PrintContact();
 };
 
 #endif

@@ -1,91 +1,88 @@
-#include "includes/Contact.hpp"
+#include "Contact.hpp"
 
-void	Contact::AddContact(void)
+static int	check_phone_num(std::string str)
 {
-	std::cout << "first name: ";
-	std::cin >> f_name;
-	std::cout << "last name: ";
-	std::cin >> l_name;
-	std::cout << "nickname: ";
-	std::cin >> n_name;
-	GetPhoneNum();
-	std::cout << "darkest secret: ";
-	std::cin >> secret;
+	int	i;
+
+	i = -1;
+	while (str[++i])
+		if (isdigit(str[i]) == 0)
+			break ;
+	if (str[i])
+		return -1;
+	else
+		return 0;
+}
+
+int	Contact::AddContact()
+{
+	std::string	temp;
+
+	std::cout << "First name : ";
+	std::cin >> this->f_name;
+	if (std::cin.eof())
+		return -1;
+	
+	std::cout << "Last name : ";
+	std::cin >> this->l_name;
+	if (std::cin.eof())
+		return -1;
+	
+	std::cout << "Nickname : ";
+	std::cin >> this->n_name;
+	if (std::cin.eof())
+		return -1;
+
+	while (true)
+	{
+		std::cout << "Phone number : ";
+		std::cin >> this->phone_num;
+		if (std::cin.eof())
+		return -1;
+		if (!check_phone_num(this->phone_num))
+			break ;
+		std::cout << "** phone number is wrong. retry **" << std::endl;
+	}
+	
+	std::cout << "Darkest secret : ";
+	std::cin >> this->secret;
+	if (std::cin.eof())
+		return -1;
+	return 0;
 }
 
 void	Contact::PrintFirstName(void)
 {
-	if (f_name.length() <= 10)
-		std::cout << std::setw(10) << f_name;
+	if (this->f_name.length() <= 10)
+		std::cout << std::setw(10) << this->f_name;
 	else
-	{
-		for (int i = 0; i < 9; i++)
-			std::cout << f_name[i];
-		std::cout << ".";
-	}
+		std::cout << f_name.substr(0, 9) << ".";
+	std::cout << "|";
 }
 
 void	Contact::PrintLastName(void)
 {
-	if (l_name.length() <= 10)
-		std::cout << std::setw(10) << l_name;
+	if (this->l_name.length() <= 10)
+		std::cout << std::setw(10) << this->l_name;
 	else
-	{
-		for (int i = 0; i < 9; i++)
-			std::cout << l_name[i];
-		std::cout << ".";
-	}
+		std::cout << l_name.substr(0, 9) << ".";
+	std::cout << "|";
 }
 
-void	Contact::PrintNickname(void)
+void	Contact::PrintNickName(void)
 {
-	if (n_name.length() <= 10)
-		std::cout << std::setw(10) << n_name;
+	if (this->n_name.length() <= 10)
+		std::cout << std::setw(10) << this->n_name;
 	else
-	{
-		for (int i = 0; i < 9; i++)
-			std::cout << n_name[i];
-		std::cout << ".";
-	}
+		std::cout << n_name.substr(0, 9) << ".";
+	std::cout << "|";
 }
 
 void	Contact::PrintContact(void)
 {
-	std::cout << "first name: " << f_name << std::endl;
-	std::cout << "last name: " << l_name << std::endl;
-	std::cout << "nickname: " << n_name << std::endl;
-	std::cout << "phone number: " << phone_num << std::endl;
-	std::cout << "darkest secret: " << secret << std::endl << std::endl;
-}
-
-void	Contact::GetPhoneNum(void)
-{
-	int			cnt;
-	int			i;
-	std::string	str;
-
-	cnt = 0;
-	while (1)
-	{
-		if (cnt == 5)
-		{
-			std::cout << "** are you kidding me? again **" << std::endl;
-			exit(0);
-		}
-		std::cout << "phone number: ";
-		std::cin >> str;
-		i = -1;
-		while (str[++i])
-			if (isdigit(str[i]) == 0)
-				break ;
-		phone_num[i] = 0;
-		if (str[i] != 0)
-			std::cout << "** try again **" << std::endl;
-		else
-		{
-			phone_num = str;
-			return ;
-		}
-		cnt++;
-	}
+	std::cout << "First name: " << f_name << std::endl;
+	std::cout << "Last name: " << l_name << std::endl;
+	std::cout << "Nick name: " << n_name << std::endl;
+	std::cout << "Phone number: " << phone_num << std::endl;
+	std::cout << "Darkest secret: " << secret << std::endl;
 }

@@ -1,12 +1,11 @@
 SRC = megaphone.cpp
-GCC = c++ -Wall -Wextra -Werror -std=c++98
+CC = c++ -Wall -Wextra -Werror -std=c++98
 NAME = megaphone
 
 all : $(NAME)
 
 $(NAME) : $(SRC)
-	$(GCC) $(SRC) -o $(NAME)
-	chmod +x $(NAME)
+	$(CC) $(SRC) -o $(NAME)
 
 clean :
 	rm -rf $(NAME)
@@ -17,3 +16,5 @@ fclean :
 re :
 	make fclean
 	make all
+
+.PHONY = all clean fclean re

@@ -1,16 +1,15 @@
 SRCS = PhoneBook.cpp Contact.cpp main.cpp
 OBJS = $(SRCS:%.cpp=%.o)
-GCC = c++ -Wall -Wextra -Werror -std=c++98
+CC = c++ -Wall -Wextra -Werror -std=c++98
 NAME = phonebook
 
 %.o : %.cpp
-	$(GCC) -c $< -o $@
+	$(CC) -c $< -o $@
 
 all : $(NAME)
 
 $(NAME) : $(OBJS)
-	$(GCC) $(OBJS) -o $(NAME)
-	chmod +x $(NAME)
+	$(CC) $(OBJS) -o $(NAME)
 
 clean :
 	rm -rf $(OBJS)
@@ -22,3 +21,5 @@ fclean :
 re :
 	make fclean
 	make all
+
+.PHONY = all clean fclean re
