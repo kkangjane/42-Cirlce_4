@@ -1,7 +1,7 @@
 SRCS = main.cpp HumanA.cpp HumanB.cpp Weapon.cpp
 OBJS = $(SRCS:%.cpp=%.o)
 GCC = c++ -Wall -Wextra -Werror -std=c++98
-NAME = hi_brain
+NAME = violence
 
 %.o : %.cpp
 	$(GCC) -c $< -o $@

@@ -5,9 +5,8 @@
 # include <fstream>
 # include <string>
 
-int	err_msg(const std::string msg);
-int	open_infile(char *av, std::ifstream &infile);
-int	open_outfile(char *av, std::ofstream &outfile);
-int	check_args(int argc, char **argv, std::string &s1, std::string &s2);
+int		check_args(int argc, char **argv, std::string &filename, std::string &s1, std::string &s2);
+int		open_files(std::ifstream &infile, std::ofstream &outfile, std::string filename);
+void	sed(std::string s1, std::string s2, std::ifstream &infile, std::ofstream &outfile);
 
 #endif

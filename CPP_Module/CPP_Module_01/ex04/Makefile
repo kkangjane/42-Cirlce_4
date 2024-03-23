@@ -1,7 +1,7 @@
 SRCS = main.cpp
 OBJS = $(SRCS:%.cpp=%.o)
 GCC = c++ -Wall -Wextra -Werror -std=c++98
-NAME = test
+NAME = sed
 
 %.o : %.cpp
 	$(GCC) -c $< -o $@
@@ -10,7 +10,6 @@ all : $(NAME)
 
 $(NAME) : $(OBJS)
 	$(GCC) $(OBJS) -o $(NAME)
-	chmod +x $(NAME)
 
 clean :
 	rm -rf $(OBJS)
