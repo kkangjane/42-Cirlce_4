@@ -1,8 +1,20 @@
 #include "Fixed.hpp"
 
-Fixed::Fixed(void) : raw_bits(0)
+Fixed::Fixed(void) : raw_bits(0), fractional_bits(0)
 {
 	std::cout << "Default constructor called" << std::endl;
+}
+
+Fixed::Fixed(const int raw)
+{
+    std::cout << "Int constructor called" << std::endl;
+    this->raw_bits = raw;
+}
+
+Fixed::Fixed(const float raw)
+{
+    std::cout << "Float constructor called" << std::endl;
+    this->raw_bits = raw;
 }
 
 Fixed::Fixed(const Fixed &obj)

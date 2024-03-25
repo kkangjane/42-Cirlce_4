@@ -10,6 +10,8 @@ class Fixed
 		int		fractional_bits;
 	public:
 		Fixed(void);
+		Fixed(const int raw);
+		Fixed(const float raw);
 		Fixed(const Fixed &obj);
 		~Fixed(void);
 		int		getRawBits(void) const;
