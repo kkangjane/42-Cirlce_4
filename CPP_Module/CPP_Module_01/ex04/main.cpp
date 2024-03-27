@@ -1,5 +1,9 @@
 #include "main.hpp"
 
+int		check_args(int argc, std::string &s1);
+int		open_files(std::ifstream &infile, std::ofstream &outfile, std::string filename);
+void	sed(std::string s1, std::string s2, std::ifstream &infile, std::ofstream &outfile);
+
 int	main(int argc, char **argv)
 {
 	std::string		filename;
@@ -8,12 +12,20 @@ int	main(int argc, char **argv)
 	std::ifstream	infile;
 	std::ofstream	outfile;
 
-	if (check_args(argc, argv, filename, s1, s2))
+	if (check_args(argc, s1))
 		return 1;
+
+	filename = argv[1];
+	s1 = argv[2];
+	s2 = argv[3];
+
 	if (open_files(infile, outfile, filename))
 		return 1;
-	
+
 	sed(s1, s2, infile, outfile);
+
+	infile.close();
+	outfile.close();
 
 	return 0;
 }
@@ -21,53 +33,44 @@ int	main(int argc, char **argv)
 void	sed(std::string s1, std::string s2, std::ifstream &infile, std::ofstream &outfile)
 {
 	std::string	buf;
-	int			cur;
-	int			pos;
-	int			buf_len;
-	int			s1_len = s1.length();
-	int			s2_len = s2.length();
+	size_t		cur;
+	size_t		pos;
+	size_t		s1_len = s1.length();
+	size_t		s2_len = s2.length();
 
 	while (std::getline(infile, buf))
 	{
-		buf_len = buf.length();
 		cur = 0;
 		while (true)
 		{
-			pos = buf.find(s1, cur); // cur부터 s1을 찾아서 index를 pos에 넣는다.
-			if (!(pos >= 0 && pos < buf_len))
+			pos = buf.find(s1, cur);
+			if (pos == std::string::npos)
 				break ;
-			buf = buf.erase(pos, s1_len); // s1을 지운다.
-			buf.insert(pos, s2); // 그 자리에 s2를 넣는다.
+			buf = buf.erase(pos, s1_len);
+			buf.insert(pos, s2);
 			cur = pos + s2_len;
 		}
-		outfile.write(buf.c_str(), buf.length());
+		outfile << buf;
 		if (infile.eof())
 			break ;
 		outfile << std::endl;
 	}
-	
-	infile.close();
-	outfile.close();
 }
 
-int	check_args(int argc, char **argv, std::string &filename, std::string &s1, std::string &s2)
+int	check_args(int argc, std::string &s1)
 {
 	if (argc != 4)
 	{
 		std::cerr << "Usage: ./sed <filename> <s1> <s2>" << std::endl;
 		return 1;
 	}
-	
-	filename = argv[1];
-	
-	s1 = argv[2];
-	if (s1[0] == 0)
+
+	if (!s1.empty())
 	{
 		std::cerr << "s1 is too short" << std::endl;
 		return 1;
 	}
-	s2 = argv[3];
-	
+
 	return 0;
 }
 

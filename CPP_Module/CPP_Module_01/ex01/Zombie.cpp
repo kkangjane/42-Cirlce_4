@@ -1,19 +1,11 @@
 #include "Zombie.hpp"
 
-Zombie::Zombie(void)
-{
-}
-
-Zombie::~Zombie(void)
-{
-}
-
 void	Zombie::announce(void)
 {
-	std::cout << this->name << ": BraiiiiiiinnnzzzZ..." << std::endl;
+	std::cout << name << ": BraiiiiiiinnnzzzZ..." << std::endl;
 }
 
-void	Zombie::AddName(std::string _name)
+void	Zombie::SetName(const std::string _name)
 {
-	this->name = _name;
+	name = _name;
 }

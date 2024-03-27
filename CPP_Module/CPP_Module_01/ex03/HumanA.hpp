@@ -9,10 +9,9 @@ class	HumanA
 		std::string	name;
 		Weapon		&weapon;
 	public:
-		HumanA(std::string _name, Weapon &_weapon);
-		~HumanA(void);
-		void		attack(void);
-		std::string	getName(void);		
+		HumanA(const std::string _name, Weapon &_weapon);
+		void	attack(void);
+		void	attack(void) const;	
 };
 
 #endif
