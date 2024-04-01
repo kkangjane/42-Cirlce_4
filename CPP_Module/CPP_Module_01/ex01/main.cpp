@@ -5,7 +5,7 @@ int	main(void)
 	Zombie	*test = ZombieHorde(10, "zombie");
 
 	for (int i = 0; i < 10; i++)
-		test[i].announce();
+		test[i].Announce();
 	delete [] test;
 	
 	// system("leaks hord_zombie");

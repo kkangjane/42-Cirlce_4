@@ -5,4 +5,7 @@
 # include <fstream>
 # include <string>
 
+# include "files.hpp"
+# include "sed.hpp"
+
 #endif

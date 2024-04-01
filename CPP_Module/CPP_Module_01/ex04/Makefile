@@ -1,4 +1,4 @@
-SRCS = main.cpp
+SRCS = main.cpp sed.cpp files.cpp
 OBJS = $(SRCS:%.cpp=%.o)
 GCC = c++ -Wall -Wextra -Werror -std=c++98
 NAME = sed
