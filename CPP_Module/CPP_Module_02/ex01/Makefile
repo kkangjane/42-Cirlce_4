@@ -17,7 +17,7 @@ clean :
 
 fclean :
 	make clean
-	rm -rf `$(NAME)
+	rm -rf $(NAME)
 
 re :
 	make fclean
