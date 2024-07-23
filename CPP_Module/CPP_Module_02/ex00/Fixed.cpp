@@ -3,13 +3,13 @@
 Fixed::Fixed(void)
 {
 	std::cout << "Default constructor called" << std::endl;
-	this->raw_bits = 0;
+	this->setRawBits((const int) 0);
 }
 
 Fixed::Fixed(const Fixed &obj)
 {
 	std::cout << "Copy constructor called" << std::endl;
-	this->raw_bits = obj.getRawBits();
+	this->setRawBits(obj.getRawBits());
 }
 
 Fixed::~Fixed(void)
@@ -17,12 +17,10 @@ Fixed::~Fixed(void)
 	std::cout << "Destructor called" << std::endl;
 }
 
-
-/* 더 공부! */
 Fixed& Fixed::operator=(const Fixed& other)
 {
 	std::cout << "Copy assignment operator called" << std::endl;
-	this->raw_bits = other.getRawBits();
+	this->setRawBits(other.getRawBits());
 	return *this;
 }
 

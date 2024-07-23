@@ -15,24 +15,11 @@ class	Fixed
 		Fixed(float num);
 		~Fixed(void);
 		Fixed&	operator=(const Fixed& other);
+
 		int 	getRawBits(void) const;
 		void	setRawBits(int const raw);
 		float	toFloat(void) const;
 		int		toInt(void) const;
-		friend std::ostream& operator<<(std::ostream& os, const Fixed& fixed);
 };
 
 #endif
-
-
-/*
-float	Fixed::toFloat(void) const
-{
-	return ((float)this->value / (1 << this->bits)); 
-}
-
-int	Fixed::toInt(void) const
-{
-	return (this->value >> this->bits);
-}
-*/

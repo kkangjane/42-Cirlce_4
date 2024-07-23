@@ -3,25 +3,25 @@
 Fixed::Fixed(void)
 {
 	std::cout << "Default constructor called" << std::endl;
-	this->raw_bits = 0;
+	this->setRawBits(0);
 }
 
 Fixed::Fixed(const Fixed &obj)
 {
 	std::cout << "Copy constructor called" << std::endl;
-	this->raw_bits = obj.getRawBits();
+	this->setRawBits(obj.getRawBits());
 }
 
 Fixed::Fixed(int num)
-{
+{ // 정수를 고정소수로 만든다.
 	std::cout << "Int constructor called" << std::endl;
-	this->raw_bits = num << this->fractional_bits;
+	this->setRawBits(num << this->fractional_bits);
 }
 
 Fixed::Fixed(float num)
-{
+{ // 부동소수를 받아서 고정소수로 바꾼다.
 	std::cout << "Float constructor called" << std::endl;
-	this->raw_bits = roundf(num * (1 << this->fractional_bits));
+	this->setRawBits(roundf(num * (1 << this->fractional_bits)));
 }
 
 Fixed::~Fixed(void)
@@ -29,18 +29,16 @@ Fixed::~Fixed(void)
 	std::cout << "Destructor called" << std::endl;
 }
 
-/* 더 공부! */
 Fixed& Fixed::operator=(const Fixed& other)
 {
 	std::cout << "Copy assignment operator called" << std::endl;
-	this->raw_bits = other.getRawBits();
+	this->setRawBits(other.getRawBits());
 	return *this;
 }
 
 std::ostream& operator<<(std::ostream& os, const Fixed& fixed)
 {
-	os << fixed.toFloat();
-	return os;
+	return os << fixed.toFloat();
 }
 
 int	Fixed::getRawBits(void) const
@@ -54,13 +52,14 @@ void	Fixed::setRawBits(int const raw)
 	this->raw_bits = raw;
 }
 
-
 float	Fixed::toFloat(void) const
 {
+	// 고정소수를 부동소수로 리턴한다.
 	return ((float)this->raw_bits / (1 << this->fractional_bits));
 }
 
 int		Fixed::toInt(void) const
 {
+	// 고정소수를 정수로 리턴한다.
 	return (this->raw_bits >> this->fractional_bits);
 }
