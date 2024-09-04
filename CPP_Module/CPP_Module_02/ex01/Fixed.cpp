@@ -22,6 +22,7 @@ Fixed::Fixed(float num)
 { // 부동소수를 받아서 고정소수로 바꾼다.
 	std::cout << "Float constructor called" << std::endl;
 	this->setRawBits(roundf(num * (1 << this->fractional_bits)));
+	// 256을 곱하고 이의 반올림 값을 저장하면서 더 근사치가 되도록 만든다.
 }
 
 Fixed::~Fixed(void)
@@ -53,13 +54,13 @@ void	Fixed::setRawBits(int const raw)
 }
 
 float	Fixed::toFloat(void) const
-{
-	// 고정소수를 부동소수로 리턴한다.
+{	// 고정소수를 부동소수로 리턴한다.
+	// ex. raw_bits=10860일 때(42.4219) 8비트 고정인 256으로 나누면 소수로 표현할 수 있다.
 	return ((float)this->raw_bits / (1 << this->fractional_bits));
 }
 
 int		Fixed::toInt(void) const
-{
-	// 고정소수를 정수로 리턴한다.
+{	// 고정소수를 정수로 리턴한다.
+	// 그냥 8비트만 옆으로 옮기면 정수값만을 나타낸다.
 	return (this->raw_bits >> this->fractional_bits);
 }
