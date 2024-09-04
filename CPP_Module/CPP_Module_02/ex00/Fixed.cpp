@@ -21,7 +21,7 @@ Fixed& Fixed::operator=(const Fixed& other)
 {
 	std::cout << "Copy assignment operator called" << std::endl;
 	this->setRawBits(other.getRawBits());
-	return *this;
+	return *this; // 연쇄 대입을 가능하게 하기 위해..
 }
 
 int	Fixed::getRawBits(void) const
