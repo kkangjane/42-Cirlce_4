@@ -12,13 +12,13 @@ Fixed::Fixed(const Fixed &obj)
 	this->setRawBits(obj.getRawBits());
 }
 
-Fixed::Fixed(int num)
+Fixed::Fixed(const int num)
 { // 정수를 고정소수로 만든다.
 	std::cout << "Int constructor called" << std::endl;
 	this->setRawBits(num << this->fractional_bits);
 }
 
-Fixed::Fixed(float num)
+Fixed::Fixed(const float num)
 { // 부동소수를 받아서 고정소수로 바꾼다.
 	std::cout << "Float constructor called" << std::endl;
 	this->setRawBits(roundf(num * (1 << this->fractional_bits)));
@@ -30,10 +30,10 @@ Fixed::~Fixed(void)
 	std::cout << "Destructor called" << std::endl;
 }
 
-Fixed& Fixed::operator=(const Fixed& other)
+Fixed& Fixed::operator=(const Fixed& obj)
 {
 	std::cout << "Copy assignment operator called" << std::endl;
-	this->setRawBits(other.getRawBits());
+	this->setRawBits(obj.getRawBits());
 	return *this;
 }
 
@@ -44,23 +44,22 @@ std::ostream& operator<<(std::ostream& os, const Fixed& fixed)
 
 int	Fixed::getRawBits(void) const
 {
-	std::cout << "getRawBits member function called" << std::endl;
-	return this->raw_bits;
+	return this->fixed_point;
 }
 
 void	Fixed::setRawBits(int const raw)
 {
-	this->raw_bits = raw;
+	this->fixed_point = raw;
 }
 
 float	Fixed::toFloat(void) const
-{	// 고정소수를 부동소수로 리턴한다.
-	// ex. raw_bits=10860일 때(42.4219) 8비트 고정인 256으로 나누면 소수로 표현할 수 있다.
-	return ((float)this->raw_bits / (1 << this->fractional_bits));
+{	// 고정소수를 부동소수로 리턴
+	// ex. fixed_point=10860일 때(42.4219) 8비트 고정인 256으로 나누면 소수로 표현할 수 있다.
+	return ((float)this->fixed_point / (1 << this->fractional_bits));
 }
 
 int		Fixed::toInt(void) const
-{	// 고정소수를 정수로 리턴한다.
+{	// 고정소수를 정수로 리턴
 	// 그냥 8비트만 옆으로 옮기면 정수값만을 나타낸다.
-	return (this->raw_bits >> this->fractional_bits);
+	return (this->fixed_point >> this->fractional_bits);
 }

@@ -6,40 +6,41 @@
 class	Fixed
 {
 	private:
-		int 				raw_bits;
-		const static int	fractional_bits = 8;
+		int 				fixed_point;
+		static const int	fractional_bits = 8;
+
 	public:
-		Fixed(void);
+		Fixed();
 		Fixed(const Fixed &obj);
-		Fixed(int num);
-		Fixed(float num);
-		~Fixed(void);
+		Fixed(const int num);
+		Fixed(const float num);
+		~Fixed();
 
 		int 	getRawBits(void) const;
 		void	setRawBits(int const raw);
 		float	toFloat(void) const;
 		int		toInt(void) const;
-		Fixed&  operator=(const Fixed& other);
+		Fixed&  operator=(const Fixed& obj);
 
         /* 비교 연산자 */
-        bool    operator==(const Fixed& other);
-        bool    operator!=(const Fixed& other);
-        bool    operator<=(const Fixed& other);
-        bool    operator>=(const Fixed& other);
-        bool    operator<(const Fixed& other);
-        bool    operator>(const Fixed& other);
+        bool			operator==(const Fixed& obj);
+        bool			operator!=(const Fixed& obj);
+        bool			operator<=(const Fixed& obj);
+        bool			operator>=(const Fixed& obj);
+        bool			operator<(const Fixed& obj);
+        bool			operator>(const Fixed& obj);
 
         /* 산술연산자 */
-        Fixed   operator+(const Fixed& other);
-        Fixed   operator-(const Fixed& other);
-        Fixed   operator*(const Fixed& other);
-        Fixed   operator/(const Fixed& other);
+        Fixed   		operator+(const Fixed& obj);
+        Fixed   		operator-(const Fixed& obj);
+        Fixed   		operator*(const Fixed& obj);
+        Fixed   		operator/(const Fixed& obj);
 
         /* 증감연산자 */
-        Fixed&  operator++(void);
-        Fixed&  operator--(void);
-        Fixed   operator++(int);
-        Fixed   operator--(int);
+        Fixed&			operator++(void);
+        Fixed&		  	operator--(void);
+        const Fixed		operator++(int);
+        const Fixed   	operator--(int);
 
         static const Fixed  &min(Fixed const &copy1, Fixed const &copy2);
         static const Fixed  &max(Fixed const &copy1, Fixed const &copy2);

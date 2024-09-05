@@ -2,27 +2,38 @@
 
 Fixed::Fixed(void)
 {
+	std::cout << "Default constructor called" << std::endl;
 	this->setRawBits(0);
 }
 
 Fixed::Fixed(const Fixed &obj)
 {
+	std::cout << "Copy constructor called" << std::endl;
 	this->setRawBits(obj.getRawBits());
 }
 
-Fixed::Fixed(int num)
+Fixed::Fixed(const int num)
 {
+	std::cout << "Int constructor called" << std::endl;
 	this->setRawBits(num << this->fractional_bits);
 }
 
-Fixed::Fixed(float num)
+Fixed::Fixed(const float num)
 {
+	std::cout << "Float constructor called" << std::endl;
 	this->setRawBits(roundf(num * (1 << this->fractional_bits)));
 }
 
 Fixed::~Fixed(void)
 {
-	return ;
+	std::cout << "Destructor called" << std::endl;
+}
+
+Fixed& Fixed::operator=(const Fixed& obj)
+{
+	std::cout << "Copy assignment operator called" << std::endl;
+	this->setRawBits(obj.getRawBits());
+	return *this;
 }
 
 std::ostream& operator<<(std::ostream& os, const Fixed& fixed)
@@ -32,31 +43,25 @@ std::ostream& operator<<(std::ostream& os, const Fixed& fixed)
 
 int	Fixed::getRawBits(void) const
 {
-	return this->raw_bits;
+	return this->fixed_point;
 }
 
 void	Fixed::setRawBits(int const raw)
 {
-	this->raw_bits = raw;
+	this->fixed_point = raw;
 }
 
 float	Fixed::toFloat(void) const
 {
-	return ((float)this->raw_bits / (1 << this->fractional_bits));
+	return ((float)this->fixed_point / (1 << this->fractional_bits));
 }
 
 int		Fixed::toInt(void) const
 {
-	return (this->raw_bits >> this->fractional_bits);
+	return (this->fixed_point >> this->fractional_bits);
 }
 
-Fixed& Fixed::operator=(const Fixed& obj)
-{
-	this->setRawBits(obj.getRawBits());
-	return *this;
-}
-
-/* 비교 연산자 */
+/* 비교 연산자 == != <= >= < > */
 bool    Fixed::operator==(const Fixed& obj)
 {
     return (this->getRawBits() == obj.getRawBits());
@@ -87,7 +92,7 @@ bool    Fixed::operator>(const Fixed& obj)
 	return (this->getRawBits() > obj.getRawBits());
 }
 
-/* 산술 연산자 */
+/* 산술 연산자 + - * \ */
 Fixed   Fixed::operator+(const Fixed& obj)
 {
     return Fixed(this->toFloat() + obj.toFloat());
@@ -109,6 +114,7 @@ Fixed   Fixed::operator/(const Fixed& obj)
 }
 
 /* 증감 연산자 */
+// 전위는 인자를 void로 설정 ++a --a
 Fixed&  Fixed::operator++(void)
 {
 	this->setRawBits(this->getRawBits() + 1);
@@ -121,7 +127,8 @@ Fixed&  Fixed::operator--(void)
 	return *this;
 }
 
-Fixed   Fixed::operator++(int)
+// 후위는 인자를 int로 설정 a++ a--
+const Fixed   Fixed::operator++(int)
 {
 	const Fixed	temp(*this);
 
@@ -129,7 +136,7 @@ Fixed   Fixed::operator++(int)
 	return temp;
 }
 
-Fixed   Fixed::operator--(int)
+const Fixed   Fixed::operator--(int)
 {
 	const Fixed	temp(*this);
 
@@ -141,20 +148,32 @@ Fixed   Fixed::operator--(int)
 /* min, max */
 const Fixed	&Fixed::min(Fixed const &copy1, Fixed const &copy2)
 {
-	return (copy1.getRawBits() <= copy2.getRawBits()) ? copy1 : copy2;
+	if (copy1.getRawBits() <= copy2.getRawBits())
+		return copy1;
+	else
+		return copy2;
 }
 
 const Fixed	&Fixed::max(Fixed const &copy1, Fixed const &copy2)
 {
-	return (copy1.getRawBits() >= copy2.getRawBits()) ? copy1 : copy2;
+	if (copy1.getRawBits() >= copy2.getRawBits())
+		return copy1;
+	else
+		return copy2;
 }
 
 const Fixed	&Fixed::min(Fixed &copy1, Fixed &copy2)
 {
-	return (copy1.getRawBits() <= copy2.getRawBits()) ? copy1 : copy2;
+	if (copy1.getRawBits() <= copy2.getRawBits())
+		return copy1;
+	else
+		return copy2;
 }
 
 const Fixed	&Fixed::max(Fixed &copy1, Fixed &copy2)
 {
-	return (copy1.getRawBits() >= copy2.getRawBits()) ? copy1 : copy2;
+	if (copy1.getRawBits() >= copy2.getRawBits())
+		return copy1;
+	else
+		return copy2;
 }
