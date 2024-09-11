@@ -6,13 +6,13 @@
 class Dog : public Animal
 {
 	private:
-		std::string	type;
-	
+		Brain	*brain;
 	public:
 		Dog();
 		Dog(const Dog &obj);
 		Dog&	operator=(const Dog &obj);
 		~Dog();
+
 		void	makeSound() const;
 		std::string	getType() const;
 };
