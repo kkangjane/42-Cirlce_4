@@ -19,7 +19,5 @@ int	main()
 	for (int i = 0; i < 10; i++)
 		delete animal[i];
 	std::cout << std::endl;
-
-	// Dog	*dog = new Dog();
 	
 }

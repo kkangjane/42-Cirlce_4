@@ -1,7 +1,7 @@
-SRCS = 
+SRCS = main.cpp Animal.cpp Dog.cpp Cat.cpp WrongAnimal.cpp WrongCat.cpp Brain.cpp
 OBJS = $(SRCS:%.cpp=%.o)
 GCC = c++ -Wall -Wextra -Werror -std=c++98
-NAME = 
+NAME = AB 
 
 %.o : %.cpp
 	$(GCC) -c $< -o $@
