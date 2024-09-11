@@ -17,20 +17,20 @@ int main()
 	dog->makeSound();
 	animal->makeSound();
 
-	// std::cout << "**************** new test *****************" << std::endl;
+	std::cout << "**************** new test *****************" << std::endl;
 
-	// const WrongAnimal	*wrong_animal = new WrongAnimal();
-	// const WrongCat		*wrong_cat = new WrongCat();
+	const WrongAnimal	*wrong_animal = new WrongAnimal();
+	const WrongCat		*wrong_cat = new WrongCat();
 
-	// wrong_animal->makeSound();
-	// wrong_cat->makeSound();
-	// std::cout << std::endl;
+	wrong_animal->makeSound();
+	wrong_cat->makeSound();
+	std::cout << std::endl;
 
-	// delete animal;
-	// delete dog;
-	// delete cat;
-	// delete wrong_animal;
-	// delete wrong_cat;
+	delete animal;
+	delete dog;
+	delete cat;
+	delete wrong_animal;
+	delete wrong_cat;
 
 	return 0;
 }
