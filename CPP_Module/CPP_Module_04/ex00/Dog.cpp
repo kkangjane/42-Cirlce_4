@@ -2,10 +2,11 @@
 
 Dog::Dog()
 {
+	this->type = "Dog";
 	std::cout << "Dog constructor called" << std::endl;
 }
 
-Dog::Dog(const Dog &obj)
+Dog::Dog(const Dog &obj): Animal(obj)
 {
 	std::cout << "Dog Copy constructor called" << std::endl;
 	this->type = obj.getType();

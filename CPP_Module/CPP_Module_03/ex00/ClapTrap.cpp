@@ -48,16 +48,20 @@ void	ClapTrap::takeDamage(unsigned int amount)
 {
 	if (this->Hit_point == 0)
 		return;
-	std::cout << "ClapTrap " << this->name + " is attacked by damage " << amount << std::endl;
-	if (this->Hit_point > amount)
-	{
-		this->Hit_point -= amount;
-		std::cout << "-> " + this->name + "\'s now Hit_point: " << this->Hit_point << std::endl;
-	}
 	else
 	{
-		this->Hit_point = 0;
-		std::cout << "-> " + this->name + " died" << std::endl;
+		std::cout << "ClapTrap " << this->name + " is attacked by damage " << amount << std::endl;
+	
+		if (this->Hit_point > amount)
+		{
+			this->Hit_point -= amount;
+			std::cout << "-> " + this->name + "\'s now Hit_point: " << this->Hit_point << std::endl;
+		}
+		else
+		{
+			this->Hit_point = 0;
+			std::cout << "-> " + this->name + " died" << std::endl;
+		}
 	}
 }
 

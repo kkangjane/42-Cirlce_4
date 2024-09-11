@@ -38,7 +38,7 @@ ScavTrap::~ScavTrap()
 
 void    ScavTrap::guardGate()
 {
-    if (this->Hit_point == 0)
+    if (this->Hit_point == 0) // Energy_ponit는 맞을 때 닳지 않으므로 고려하지 않음.
         return ;
     std::cout << "ScavTrap " + this->name + "is now in Gate Kepper mode" << std::endl; 
 }

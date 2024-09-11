@@ -40,5 +40,6 @@ void FragTrap::highFivesGuys()
 {
     if (this->Hit_point == 0)
         return ;
+
     std::cout << "FragTrap " + this->name + "highFives!" << std::endl;
 }

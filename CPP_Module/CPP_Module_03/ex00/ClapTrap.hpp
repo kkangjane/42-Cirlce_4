@@ -12,6 +12,7 @@ class ClapTrap
 		unsigned int	Attack_damage;
 
 	public:
+		//ClapTrap(); 인자가 없는 생성자는 고려하지 않음.
 		ClapTrap(std::string name);
 		ClapTrap(const ClapTrap& obj);
 		ClapTrap& operator=(const ClapTrap& obj);
