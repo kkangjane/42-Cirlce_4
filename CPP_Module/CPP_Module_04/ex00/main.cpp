@@ -20,7 +20,7 @@ int main()
 	std::cout << "**************** new test *****************" << std::endl;
 
 	const WrongAnimal	*wrong_animal = new WrongAnimal();
-	const WrongCat		*wrong_cat = new WrongCat();
+	const WrongAnimal	*wrong_cat = new WrongCat();
 
 	wrong_animal->makeSound();
 	wrong_cat->makeSound();
@@ -29,8 +29,8 @@ int main()
 	delete animal;
 	delete dog;
 	delete cat;
-	// delete wrong_animal;
-	// delete wrong_cat;
+	delete wrong_animal;
+	delete wrong_cat;
 
 	return 0;
 }
