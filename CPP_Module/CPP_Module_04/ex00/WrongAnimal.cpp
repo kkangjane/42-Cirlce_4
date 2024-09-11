@@ -2,18 +2,21 @@
 
 WrongAnimal::WrongAnimal()
 {
+	this->type = "WrongAnimal";
 	std::cout << "WrongAnimal constructor called" << std::endl;
-	this->type = "animal";
 }
 
 WrongAnimal::WrongAnimal(const WrongAnimal &obj)
 {
 	this->type = obj.getType();
+	std::cout << "WrongAnimal copy constructor called" << std::endl;
 }
 
 WrongAnimal	&WrongAnimal::operator=(const WrongAnimal &obj)
 {
-	this->type = obj.getType();
+	std::cout << "WrongAnimal copy assignment operator called" << std::endl;
+	if (this != &obj)
+		this->type = obj.getType();
 	return *this;
 }
 

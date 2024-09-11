@@ -15,7 +15,8 @@ Dog::Dog(const Dog &obj): Animal(obj)
 Dog&	Dog::operator=(const Dog &obj)
 {
 	std::cout << "Dog= called" << std::endl;
-	this->type = obj.getType();
+	if (this != &obj)
+		this->type = obj.getType();
 	return *this;
 }
 

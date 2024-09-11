@@ -2,19 +2,18 @@
 # define WRONGCAT_HPP
 
 # include <iostream>
+# include "WrongAnimal.hpp"
 
-class WrongCat
+class WrongCat : public WrongAnimal
 {
-	protected:
-		std::string	type;
-
 	public:
 		WrongCat();
 		WrongCat(const WrongCat &obj);
 		WrongCat&		operator=(const WrongCat &obj);
-		virtual				~WrongCat();
-		virtual	void		makeSound() const;
-		virtual std::string	getType() const;
+		~WrongCat();
+		
+		void		makeSound() const;
+		std::string	getType() const;
 };
 
 

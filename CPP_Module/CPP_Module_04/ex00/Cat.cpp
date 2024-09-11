@@ -2,6 +2,7 @@
 
 Cat::Cat()
 {
+	this->type = "Cat";
 	std::cout << "Cat constructor called" << std::endl;
 }
 
@@ -14,7 +15,8 @@ Cat::Cat(const Cat &obj): Animal(obj)
 Cat&	Cat::operator=(const Cat &obj)
 {
 	std::cout << "Cat= called" << std::endl;
-	this->type = obj.getType();
+	if (this != &obj)
+		this->type = obj.getType();
 	return *this;
 }
 
