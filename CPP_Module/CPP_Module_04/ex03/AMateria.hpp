@@ -4,7 +4,8 @@
 # include <iostream>
 # include <string>
 # include "ICharacter.hpp"
-# include "IMateriaSource.hpp"
+
+class ICharacter;
 
 class AMateria
 {
@@ -12,12 +13,13 @@ class AMateria
 		std::string	type;
 
 	public:
+		AMateria();
 		AMateria(std::string const &type);
 		AMateria(const AMateria &obj);
 		AMateria &operator=(const AMateria &obj);
-		~AMateria();
+		virtual ~AMateria();
 
-		std::string const	&getType() const;
+		std::string			const & getType() const;
 		virtual	AMateria	*clone() const;
 		virtual void		use(ICharacter& target);
 };

@@ -1,4 +1,4 @@
-SRCS = main.cpp AMateria.cpp IMateriaSource.cpp ICharacter.cpp
+SRCS = main.cpp AMateria.cpp Character.cpp Cure.cpp Ice.cpp MateriaSource.cpp
 OBJS = $(SRCS:%.cpp=%.o)
 GCC = c++ -Wall -Wextra -Werror -std=c++98
 NAME = test
