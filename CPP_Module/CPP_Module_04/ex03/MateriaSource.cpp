@@ -4,8 +4,6 @@ MateriaSource::MateriaSource()
 {
 	for (int i = 0; i < 4; i++)
 		this->inventory[i] = 0;
-
-	std::cout << "MateriaSource Default Constructor called" << std::endl;
 }
 
 MateriaSource::MateriaSource(const MateriaSource &obj)
@@ -17,8 +15,6 @@ MateriaSource::MateriaSource(const MateriaSource &obj)
 		else
 			this->inventory[i] = 0;
 	}
-
-	std::cout << "MateriaSource Copy Constructor called" << std::endl;
 }
 
 MateriaSource::~MateriaSource()
@@ -26,8 +22,6 @@ MateriaSource::~MateriaSource()
 	for (int i = 0; i < 4; i++)
 		if (this->inventory[i])
 			delete this->inventory[i];
-
-	std::cout << "MateriaSource Default Destructor called" << std::endl;
 }
 MateriaSource&	MateriaSource::operator=(const MateriaSource &obj)
 {
@@ -43,14 +37,11 @@ MateriaSource&	MateriaSource::operator=(const MateriaSource &obj)
 		else
 			this->inventory[i] = 0;
 	}
-
-	std::cout << "MateriaSource Copy Assignment opearator called" << std::endl;
 	return *this;
 }
 
 void	MateriaSource::learnMateria(AMateria *m)
 {
-	std::cout << "MateriaSource learnMateria called" << std::endl;
 	for (int i = 0; i < 4; i++)
 	{
 		if (!this->inventory[i])
@@ -66,7 +57,6 @@ void	MateriaSource::learnMateria(AMateria *m)
 
 AMateria*	MateriaSource::createMateria(std::string const &type)
 {
-	std::cout << "MateriaSource createMateria called" << std::endl;
 	for (int i = 0; i < 4; i++)
 	{
 		if (this->inventory[i] && type == this->inventory[i]->getType())

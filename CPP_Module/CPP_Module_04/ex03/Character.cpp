@@ -5,7 +5,6 @@ Character::Character()
 	this->name = "default";
 	for (int i = 0; i < 4; i++)
 		this->inventory[i] = 0;
-	std::cout << "Character Default Constructor called" << std::endl;
 }
 
 Character::Character(const std::string &name)
@@ -13,7 +12,6 @@ Character::Character(const std::string &name)
 	this->name = name;
 	for (int i = 0; i < 4; i++)
 		this->inventory[i] = 0;
-	std::cout << "Character Constructor called" << std::endl;
 }
 
 Character::Character(const Character &obj)
@@ -26,7 +24,6 @@ Character::Character(const Character &obj)
 		else
 			this->inventory[i] = 0;
 	}
-	std::cout << "Character Copy Constructor called" << std::endl;
 }
 
 Character&	Character::operator=(const Character &obj)
@@ -44,7 +41,6 @@ Character&	Character::operator=(const Character &obj)
 				this->inventory[i] = 0;
 		}
 	}
-	std::cout << "Character Copy assignment constructor called" << std::endl;
 	return (*this);
 }
 
@@ -54,7 +50,6 @@ Character::~Character()
 		if (this->inventory[i])
 			delete this->inventory[i];
 
-	std::cout << "Character Destructor called" << std::endl;
 }
 
 std::string const &Character::getName() const
@@ -72,6 +67,8 @@ void	Character::equip(AMateria *m)
 			return ;
 		}
 	}
+	delete m;
+	return ;
 }
 
 void	Character::unequip(int idx)
