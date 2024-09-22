@@ -2,49 +2,42 @@
 
 AMateria::AMateria()
 {
-	type = "";
-	std::cout << "AMateria Default constructor called" << std::endl;
+	this->type = "Default";
+	std::cout << "AMateria Default Constructor called" << std::endl;
 }
-
 
 AMateria::AMateria(std::string const &type)
 {
 	this->type = type;
-	std::cout << "AMateria default constructor called" << std::endl;
+	std::cout << "AMateria Default Constructor called" << std::endl;
 }
 
-AMateria::AMateria(const AMateria &obj)
+AMateria::AMateria(const AMateria& obj)
 {
+	std::cout << "AMateria Copy constructor called" << std::endl;
 	this->type = obj.getType();
-	std::cout << "AMateria copy constructor called" << std::endl;
 }
 
-AMateria	&AMateria::operator=(const AMateria &obj)
+AMateria& AMateria::operator=(const AMateria& obj)
 {
-	std::cout << "AMateria copy assignment constructor called" << std::endl;
-	if (this == &obj)
-		return *this;
-	this->type = obj.getType();
+	std::cout << "AMateria Copy assignment constructor called" << std::endl;
+	if (this != &obj)
+		this->type = obj.getType();
 	return *this;
 }
 
-AMateria::~AMateria()
+AMateria::~AMateria(void)
 {
-	std::cout << "AMateria destructor called" << std::endl;
+	std::cout << "AMateria Destructor called" << std::endl;
 }
 
-std::string	const	&AMateria::getType() const
+std::string const &AMateria::getType() const
 {
+	std::cout << "AMateria getType called" << std::endl;
 	return this->type;
 }
 
-AMateria	*AMateria::clone() const
+void	AMateria::use(ICharacter& target)
 {
-	AMateria	*clone = new AMateria();
-	return clone;
-}
-
-void	AMateria::use(ICharacter &target)
-{
-	std::cout << "use a " << this->getType() << "at " << target.getName();
+	std::cout << "* use a " << getType() << " at " << target.getName();
 }

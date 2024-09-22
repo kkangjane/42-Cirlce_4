@@ -19,6 +19,8 @@ Dog&	Dog::operator=(const Dog &obj)
 	std::cout << "dog copy assignment operator called" << std::endl;
 	if (this != &obj)
 	{
+		if (this->brain)
+			delete this->brain;
 		this->type = obj.getType();
 		this->brain = new Brain(*obj.brain);
 	}
@@ -38,6 +40,10 @@ void	Dog::makeSound() const
 
 std::string	Dog::getType() const
 {
-	delete brain;
 	return this->type;
+}
+
+Brain	*Dog::getBrain() const
+{
+	return this->brain;
 }

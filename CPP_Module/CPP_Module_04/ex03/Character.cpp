@@ -2,86 +2,89 @@
 
 Character::Character()
 {
-	std::cout << "Character default constructor called" << std::endl;
-	this->name = "";
+	this->name = "default";
 	for (int i = 0; i < 4; i++)
 		this->inventory[i] = 0;
+	std::cout << "Character Default Constructor called" << std::endl;
 }
 
-Character::Character(std::string name)
+Character::Character(const std::string &name)
 {
-	std::cout << "Character(" << name << ") constructor called" << std::endl;
 	this->name = name;
 	for (int i = 0; i < 4; i++)
 		this->inventory[i] = 0;
+	std::cout << "Character Constructor called" << std::endl;
 }
 
 Character::Character(const Character &obj)
 {
-	std::cout << "Character copy constructor called" << std::endl;
 	this->name = obj.getName();
 	for (int i = 0; i < 4; i++)
-		this->inventory[i] = obj.inventory[i];
+	{
+		if (obj.inventory[i])
+			this->inventory[i] = obj.inventory[i]->clone();
+		else
+			this->inventory[i] = 0;
+	}
+	std::cout << "Character Copy Constructor called" << std::endl;
 }
 
-Character	&Character::operator=(const Character &obj)
+Character&	Character::operator=(const Character &obj)
 {
-	std::cout << "Character copy assignment constructor called" << std::endl;
-	if (this == &obj)
-		return *this;
-	this->name = obj.getName();
-	for (int i = 0; i < 4; i++)
-		this->inventory[i] = obj.inventory[i];
-	return *this;
+	if (this != &obj)
+	{
+		name = obj.getName();
+		for (int i = 0; i < 4; i++)
+		{
+			if (this->inventory[i])
+				delete this->inventory[i];
+			if (obj.inventory[i])
+				this->inventory[i] = obj.inventory[i]->clone();
+			else
+				this->inventory[i] = 0;
+		}
+	}
+	std::cout << "Character Copy assignment constructor called" << std::endl;
+	return (*this);
 }
 
 Character::~Character()
 {
-	std::cout << "Character destructor called" << std::endl;
 	for (int i = 0; i < 4; i++)
 		if (this->inventory[i])
 			delete this->inventory[i];
+
+	std::cout << "Character Destructor called" << std::endl;
 }
 
-std::string	const &Character::getName() const
+std::string const &Character::getName() const
 {
-	return this->name;
+	return (name);
 }
 
 void	Character::equip(AMateria *m)
 {
-	int	i = -1;
-	while (++i < 4)
+	for (int i = 0; i < 4; i++)
+	{
 		if (this->inventory[i] == 0)
-			break ;
-	if (i < 4)
-		this->inventory[i] = m;
-	else
-		std::cout << "Inventory is full" << std::endl;
-
+		{
+			this->inventory[i] = m;
+			return ;
+		}
+	}
 }
 
 void	Character::unequip(int idx)
 {
-	if (idx < 0 || idx > 4)
+	if (idx > 3 || idx < 0 || this->inventory[idx] == 0)
 		return ;
+
+	delete this->inventory[idx];
 	this->inventory[idx] = 0;
 }
 
-void	Character::use(int idx, ICharacter &target)
+void	Character::use(int idx, ICharacter& target)
 {
-	if (idx < 0 || idx > 4 || this->inventory[idx] == 0)
-		return ;
-	std::cout << this->getName();
-	this->inventory[idx]->use(target);
-}
-
-AMateria	*Character::getMeteriaFromInventory(int idx)
-{
-	if (idx < 0 || idx > 4)
-		return 0;
-	
-	if (this->inventory[idx] != 0)
-		return this->inventory[idx];
-	return 0;
+	if (this->inventory[idx])
+		this->inventory[idx]->use(target);
 }

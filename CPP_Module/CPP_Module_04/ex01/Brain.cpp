@@ -38,7 +38,7 @@ std::string Brain::getIdea(int idx) const
     return this->ideas[idx];
 }
 
-void    Brain::setIdea(std::string idea, int idx)
+void    Brain::setIdea(std::string &idea, int idx)
 {
     if (idx < 0 || idx > 99)
         return ;

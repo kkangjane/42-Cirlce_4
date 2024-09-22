@@ -2,6 +2,9 @@
 # define MATERIASOURCE_HPP
 
 # include "IMateriaSource.hpp"
+# include <iostream>
+# include <string>
+
 
 class MateriaSource : public IMateriaSource
 {

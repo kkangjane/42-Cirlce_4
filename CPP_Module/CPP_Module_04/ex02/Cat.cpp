@@ -2,9 +2,9 @@
 
 Cat::Cat()
 {
+	std::cout << "Cat constructor called" << std::endl;
 	this->type = "Cat";
 	this->brain = new Brain();
-	std::cout << "Cat constructor called" << std::endl;
 }
 
 Cat::Cat(const Cat &obj) : Animal(obj)
@@ -20,6 +20,8 @@ Cat&	Cat::operator=(const Cat &obj)
 	if (this != &obj)
 	{
 		this->type = obj.getType();
+		if (this->brain)
+			delete this->brain;
 		this->brain = new Brain(*obj.brain);
 	}
 	return *this;
@@ -38,6 +40,10 @@ void	Cat::makeSound() const
 
 std::string	Cat::getType() const
 {
-	delete this->brain;
 	return this->type;
+}
+
+Brain	*Cat::getBrain() const
+{
+	return this->brain;
 }

@@ -30,3 +30,17 @@ Brain::~Brain()
 {
     std::cout << "Brain destructor called" << std::endl;
 }
+
+std::string Brain::getIdea(int idx) const
+{
+    if (idx < 0 || idx > 99)
+        return "";
+    return this->ideas[idx];
+}
+
+void    Brain::setIdea(std::string &idea, int idx)
+{
+    if (idx < 0 || idx > 99)
+        return ;
+    this->ideas[idx] = idea;
+}

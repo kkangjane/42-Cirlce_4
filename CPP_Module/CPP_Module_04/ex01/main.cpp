@@ -5,8 +5,14 @@
 #include "WrongCat.hpp"
 #include "Brain.hpp"
 
+void leak()
+{
+	std::system("leaks Fire");
+}
+
 int	main()
 {
+	std::atexit(leak);
 	Animal	*animal[10];
 	
 	std::cout << std::endl << "*** 5 Dogs ***" << std::endl;
@@ -22,8 +28,18 @@ int	main()
 	for (int i = 0; i < 10; i++)
 		delete animal[i];
 
-	std::cout << std::endl;
-	Dog *dog1 = new Dog();
-	Dog *dog2 = new Dog();
+	std::cout << std::endl << "*** check deep copy ***" << std::endl;
+	Cat *cat = new Cat();
+	Cat *copy = new Cat(*cat);
+	std::cout << cat->getBrain()->getIdea(0) << std::endl;
+	std::cout << copy->getBrain()->getIdea(0) << std::endl << std::endl;
 
+	std::string tmp = "hello!!";
+
+	copy->getBrain()->setIdea(tmp, 3);
+	std::cout << copy->getBrain()->getIdea(3) << std::endl;
+	std::cout << cat->getBrain()->getIdea(3) << std::endl;
+
+	delete cat;
+	delete copy;
 }
