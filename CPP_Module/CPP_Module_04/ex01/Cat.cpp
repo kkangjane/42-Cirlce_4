@@ -41,3 +41,8 @@ std::string	Cat::getType() const
 	delete this->brain;
 	return this->type;
 }
+
+Brain	*Cat::getBrain() const
+{
+	return this->brain;
+}

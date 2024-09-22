@@ -41,3 +41,8 @@ std::string	Dog::getType() const
 	delete brain;
 	return this->type;
 }
+
+Brain	*Dog::getBrain() const
+{
+	return this->brain;
+}

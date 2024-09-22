@@ -2,6 +2,7 @@
 # define DOG_HPP
 
 # include "Animal.hpp"
+# include "Brain.hpp"
 
 class Dog : public Animal
 {
@@ -15,6 +16,7 @@ class Dog : public Animal
 
 		void	makeSound() const;
 		std::string	getType() const;
+		Brain	*getBrain() const;
 };
 
 #endif
